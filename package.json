@@ -36,10 +36,10 @@
     "serialport": "^4.0.7",
     "socket.io-client": "^1.7.2",
     "vorpal": "^1.11.4",
-    "dualshock-controller": "^1.1.1",
+    "dualshock-controller": "^1.1.2",
     "node-gyp": "^3.5.0",
     "node-pre-gyp": "^0.6.33",
-    "node-hid": "^0.5.4 --driver=hidraw --build-from-source"
+    "node-hid": "^0.7.4 --driver=hidraw --build-from-source"
   },
   "devDependencies": {}
 }
