@@ -71,7 +71,7 @@ module.exports = function(options, callback) {
 			console.log(device.vendorId + " | " + device.productId);
 
 			// Detect DualShock 3 Controller HID
-			if (!pendant_started && (device.vendorId == 1356 && device.productId == 616)) {
+			if (!pendant_started && (device.vendorId == 1118 && device.productId == 2408)) {
 				console.log("Pendant Connected");
 
 				// Start Socket Connection & Controller Conection
