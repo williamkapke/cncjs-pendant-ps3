@@ -71,7 +71,7 @@ module.exports = function(options, callback) {
 			// console.log(device.vendorId + " | " + device.productId);
 
 			// Detect DualShock 4 Controller HID
-			if (!pendant_started && (device.vendorId == 1118 && device.productId == 2048)) {
+			if (!pendant_started && (device.vendorId == 1356 && device.productId == 2508)) {
 				console.log("Pendant Connected");
 
 				// Start Socket Connection & Controller Conection
@@ -158,7 +158,7 @@ module.exports = function(options, callback) {
 		controller = dualShock(
 			 {
 				  //you can use a ds4 by uncommenting this line.
-				  config: "dualshock4-generic-driver",
+				  config: "dualShock4-alternate-driver",
 				  //if using ds4 comment this line.
 				  //config : "dualShock3",
 				  //smooths the output from the acelerometers (moving averages) defaults to true
