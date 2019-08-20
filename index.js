@@ -158,9 +158,9 @@ module.exports = function(options, callback) {
 		controller = dualShock(
 			 {
 				  //you can use a ds4 by uncommenting this line.
-				  //config: "dualshock4-generic-driver",
+				  config: "dualshock4-generic-driver",
 				  //if using ds4 comment this line.
-				  config : "dualShock3",
+				  //config : "dualShock3",
 				  //smooths the output from the acelerometers (moving averages) defaults to true
 				  accelerometerSmoothing : true,
 				  //smooths the output from the analog sticks (moving averages) defaults to false
