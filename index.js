@@ -68,7 +68,7 @@ module.exports = function(options, callback) {
 		// Find DualShock 3 Controller HID
 		devices.forEach(function(device) {
 			// List Devices
-			//console.log(device.vendorId + " | " + device.productId);
+			console.log(device.vendorId + " | " + device.productId);
 
 			// Detect DualShock 3 Controller HID
 			if (!pendant_started && (device.vendorId == 1356 && device.productId == 616)) {
