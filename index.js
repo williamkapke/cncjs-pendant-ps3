@@ -69,7 +69,6 @@ module.exports = function(options, callback) {
 		devices.forEach(function(device) {
 			// List Devices
 			// console.log(device.vendorId + " | " + device.productId);
-
 			// Detect DualShock 4 Controller HID
 			if (!pendant_started && (device.vendorId == 1356 && device.productId == 2508)) {
 				console.log("Pendant Connected");
@@ -162,7 +161,7 @@ module.exports = function(options, callback) {
 				  //if using ds4 comment this line.
 				  //config : "dualShock3",
 				  //smooths the output from the acelerometers (moving averages) defaults to true
-				  accelerometerSmoothing : true,
+				  accelerometerSmoothing : false,
 				  //smooths the output from the analog sticks (moving averages) defaults to false
 				  analogStickSmoothing : false // DO NOT ENABLE, does not retun sticks to center when enabled. 128 x 128
 			 });
@@ -332,19 +331,19 @@ module.exports = function(options, callback) {
 		});
 
 		// Probe
-		controller.on('square:press', function(data) {
-			if (r1) {
-				socket.emit('command', options.port, 'gcode', 'G91');
-				socket.emit('command', options.port, 'gcode', 'G38.2 Z-15.001 F120');
-				socket.emit('command', options.port, 'gcode', 'G90');
-				socket.emit('command', options.port, 'gcode', 'G10 L20 P1 Z15.001');
-				socket.emit('command', options.port, 'gcode', 'G91');
-				socket.emit('command', options.port, 'gcode', 'G0 Z3');
-				socket.emit('command', options.port, 'gcode', 'G90');
-
-				//console.log('probe:' + data);
-			}
-		});
+		// controller.on('square:press', function(data) {
+		//	if (r1) {
+		//		socket.emit('command', options.port, 'gcode', 'G91');
+		//		socket.emit('command', options.port, 'gcode', 'G38.2 Z-15.001 F120');
+		//		socket.emit('command', options.port, 'gcode', 'G90');
+		//		socket.emit('command', options.port, 'gcode', 'G10 L20 P1 Z15.001');
+		//		socket.emit('command', options.port, 'gcode', 'G91');
+		//		socket.emit('command', options.port, 'gcode', 'G0 Z3');
+		//		socket.emit('command', options.port, 'gcode', 'G90');
+		//
+		//		//console.log('probe:' + data);
+		//	}
+		//});
 
 		// Lower Z (Slow)
 		controller.on('circle:press', function(data) {
@@ -843,13 +842,13 @@ module.exports = function(options, callback) {
 			console.log('connection:change:' + value);
 		});
 
-/*
+
 		//DualShock 3 control rumble and light settings for the controller
 		controller.setExtras({
 			rumbleLeft:  0,   // 0-1 (Rumble left on/off)
 			rumbleRight: 0,   // 0-255 (Rumble right intensity)
-			led: 2 // 2 | 4 | 8 | 16 (Leds 1-4 on/off, bitmasked)
+			led: 2 // 2 | 4 | 8 | 16 (Leds 1-4 on/off, bitmasked)		
 		});
-*/
+
 	}
 };
