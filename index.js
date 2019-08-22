@@ -161,7 +161,7 @@ module.exports = function(options, callback) {
 				  //if using ds4 comment this line.
 				  //config : "dualShock3",
 				  //smooths the output from the acelerometers (moving averages) defaults to true
-				  accelerometerSmoothing : false,
+				  accelerometerSmoothing : true,
 				  //smooths the output from the analog sticks (moving averages) defaults to false
 				  analogStickSmoothing : false // DO NOT ENABLE, does not retun sticks to center when enabled. 128 x 128
 			 });
@@ -555,7 +555,7 @@ module.exports = function(options, callback) {
 				}
 			}
 
-			//console.log("DPad Set Movemnet: " + move_x_axis + ': ' + move_y_axis + "   | " + speed)
+			console.log("DPad Set Movemnet: " + move_x_axis + ': ' + move_y_axis + "   | " + speed)
 		}
 
 		// Move Gantry X | Y
@@ -569,7 +569,7 @@ module.exports = function(options, callback) {
 				socket.emit('command', options.port, 'gcode', 'G90');  // Switch back to absolute coordinates
 
 				// Debuging
-				//console.log("DPad MOVE: " + move_y_axis + ': ' + move_y_axis + ': ' + move_z_axis);
+				console.log("DPad MOVE: " + move_y_axis + ': ' + move_y_axis + ': ' + move_z_axis);
 
 				// Reset Axis Varables
 				move_x_axis -= move_x_axis;
@@ -760,12 +760,12 @@ module.exports = function(options, callback) {
 				}
 
 				//!!!!!!!!!!!!!!!!! need to detect if it's in inches or millimetersmm to avoid and overrun in the multiplier this can be done with agreeable status I believe.
-				socket.emit('command', options.port, 'gcode', 'G21');  // set to millimeters
+				// socket.emit('command', options.port, 'gcode', 'G21');  // set to millimeters
 
 				// Move based on stick imput and mapping, need to add exponital curve.
-				socket.emit('command', options.port, 'gcode', 'G91 G0 X' + map(sum_x, 0, 128, 0.0001, 2).toFixed(4) + ' Y' + map(sum_y, 0, 128, 0.0001, 2).toFixed(4)); // Switch to relative coordinates, Move one unit right in X and one unit right in Y
-				socket.emit('command', options.port, 'gcode', 'G90');  // Switch back to absolute coordinates
-				//console.log('setInterval: x' + sum_x + ' y' + sum_y + ' | ' + 'G91 G0 X' + map(sum_x, 0, 128, 0.0001, 2).toFixed(4) + ' Y' + map(sum_y, 0, 128, 0.0001, 2).toFixed(4));
+				//socket.emit('command', options.port, 'gcode', 'G91 G0 X' + map(sum_x, 0, 128, 0.0001, 2).toFixed(4) + ' Y' + map(sum_y, 0, 128, 0.0001, 2).toFixed(4)); // Switch to relative coordinates, Move one unit right in X and one unit right in Y
+				//socket.emit('command', options.port, 'gcode', 'G90');  // Switch back to absolute coordinates
+				console.log('setInterval: x' + sum_x + ' y' + sum_y + ' | ' + 'G91 G0 X' + map(sum_x, 0, 128, 0.0001, 2).toFixed(4) + ' Y' + map(sum_y, 0, 128, 0.0001, 2).toFixed(4));
 			}
 		}
 
