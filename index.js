@@ -192,22 +192,22 @@ module.exports = function(options, callback) {
 		var psx = false;
 		controller.on('psxButton:press', function(data) {
 			psx = true;
-			//console.log(data + '|' + psx);
+			console.log(data + '|' + psx);
 		});
 		controller.on('psxButton:release', function(data) {
 			psx = false;
-			//console.log(data + '|' + psx);
+			console.log(data + '|' + psx);
 		});
 
 		// L1
 		var l1 = false;
 		controller.on('l1:press', function(data) {
 			l1 = true;
-			//console.log(data + '|' + l1);
+			console.log(data + '|' + l1);
 		});
 		controller.on('l1:release', function(data) {
 			l1 = false;
-			//console.log(data + '|' + l1);
+			console.log(data + '|' + l1);
 		});
 
 		// R1
