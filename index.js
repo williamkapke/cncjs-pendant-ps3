@@ -555,7 +555,7 @@ module.exports = function(options, callback) {
 				}
 			}
 
-			console.log("DPad Set Movemnet: " + move_x_axis + ': ' + move_y_axis + "   | " + speed)
+			//console.log("DPad Set Movemnet: " + move_x_axis + ': ' + move_y_axis + "   | " + speed)
 		}
 
 		// Move Gantry X | Y
@@ -565,11 +565,11 @@ module.exports = function(options, callback) {
 			if (move_x_axis != 0 || move_y_axis != 0 || move_z_axis != 0)
 			{
 				// Send gCode
-				socket.emit('command', options.port, 'gcode', 'G91 G0 X' + move_x_axis + " Y" + move_y_axis + " Z" + move_z_axis);
-				socket.emit('command', options.port, 'gcode', 'G90');  // Switch back to absolute coordinates
+				//socket.emit('command', options.port, 'gcode', 'G91 G0 X' + move_x_axis + " Y" + move_y_axis + " Z" + move_z_axis);
+				//socket.emit('command', options.port, 'gcode', 'G90');  // Switch back to absolute coordinates
 
 				// Debuging
-				console.log("DPad MOVE: " + move_y_axis + ': ' + move_y_axis + ': ' + move_z_axis);
+				//console.log("DPad MOVE: " + move_y_axis + ': ' + move_y_axis + ': ' + move_z_axis);
 
 				// Reset Axis Varables
 				move_x_axis -= move_x_axis;
@@ -711,7 +711,7 @@ module.exports = function(options, callback) {
 
 		// Analog Sticks
 		controller.on('left:move', function(data) {
-			//console.log('left Moved: ' + data.x + ' | ' + Number((data.y * -1) +255));
+			console.log('left Moved: ' + data.x + ' | ' + Number((data.y * -1) +255));
 			if (stick_left) {
 				left_x = data.x - 128
 				left_y = (data.y * -1) +128
@@ -720,7 +720,7 @@ module.exports = function(options, callback) {
 				left_y = 0;
 			}
 
-			//console.log('stick-left: ' +  Number(data.x - 128) + ' [' + right_x + '] | ' +  Number(data.y - 128) + ' [' + right_y + '] | ' + stick_left)
+			console.log('stick-left: ' +  Number(data.x - 128) + ' [' + right_x + '] | ' +  Number(data.y - 128) + ' [' + right_y + '] | ' + stick_left)
 		});
 		controller.on('right:move', function(data) {
 			//console.log('right Moved: ' + data.x + ' | ' + Number((data.y * -1) +255));
@@ -845,8 +845,8 @@ module.exports = function(options, callback) {
 
 		//DualShock 3 control rumble and light settings for the controller
 		controller.setExtras({
-			rumbleLeft:  0,   // 0-1 (Rumble left on/off)
-			rumbleRight: 0,   // 0-255 (Rumble right intensity)
+			rumbleLeft:  1,   // 0-1 (Rumble left on/off)
+			rumbleRight: 100,   // 0-255 (Rumble right intensity)
 			led: 2 // 2 | 4 | 8 | 16 (Leds 1-4 on/off, bitmasked)		
 		});
 
