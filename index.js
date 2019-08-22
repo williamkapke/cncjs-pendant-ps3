@@ -60,7 +60,7 @@ module.exports = function(options, callback) {
     // [Function] check for controller to conect (show up in devices), then start services. Kill services on disconect.
 	setInterval(checkController, 3*1000);
 	function checkController(socket, controller) {
-		//console.log('Checkign Controller Status');
+		console.log('Checking Controller Status');
 
 		// Get HID Devices
 		var devices = HID.devices();
@@ -68,8 +68,9 @@ module.exports = function(options, callback) {
 		// Find DualShock 3 Controller HID
 		devices.forEach(function(device) {
 			// List Devices
-			// console.log(device.vendorId + " | " + device.productId);
-			// Detect DualShock 4 Controller HID
+			console.log(device.vendorId + " | " + device.productId);
+
+			// Detect DualShock 3 Controller HID
 			if (!pendant_started && (device.vendorId == 1356 && device.productId == 2508)) {
 				console.log("Pendant Connected");
 
@@ -159,7 +160,7 @@ module.exports = function(options, callback) {
 				  //you can use a ds4 by uncommenting this line.
 				  config: "dualShock4-alternate-driver",
 				  //if using ds4 comment this line.
-				  //config : "dualShock3",
+				  // config : "dualShock3",
 				  //smooths the output from the acelerometers (moving averages) defaults to true
 				  accelerometerSmoothing : true,
 				  //smooths the output from the analog sticks (moving averages) defaults to false
@@ -331,19 +332,19 @@ module.exports = function(options, callback) {
 		});
 
 		// Probe
-		// controller.on('square:press', function(data) {
-		//	if (r1) {
-		//		socket.emit('command', options.port, 'gcode', 'G91');
-		//		socket.emit('command', options.port, 'gcode', 'G38.2 Z-15.001 F120');
-		//		socket.emit('command', options.port, 'gcode', 'G90');
-		//		socket.emit('command', options.port, 'gcode', 'G10 L20 P1 Z15.001');
-		//		socket.emit('command', options.port, 'gcode', 'G91');
-		//		socket.emit('command', options.port, 'gcode', 'G0 Z3');
-		//		socket.emit('command', options.port, 'gcode', 'G90');
-		//
-		//		//console.log('probe:' + data);
-		//	}
-		//});
+		controller.on('square:press', function(data) {
+			if (r1) {
+				socket.emit('command', options.port, 'gcode', 'G91');
+				socket.emit('command', options.port, 'gcode', 'G38.2 Z-15.001 F120');
+				socket.emit('command', options.port, 'gcode', 'G90');
+				socket.emit('command', options.port, 'gcode', 'G10 L20 P1 Z15.001');
+				socket.emit('command', options.port, 'gcode', 'G91');
+				socket.emit('command', options.port, 'gcode', 'G0 Z3');
+				socket.emit('command', options.port, 'gcode', 'G90');
+
+				//console.log('probe:' + data);
+			}
+		});
 
 		// Lower Z (Slow)
 		controller.on('circle:press', function(data) {
@@ -565,8 +566,8 @@ module.exports = function(options, callback) {
 			if (move_x_axis != 0 || move_y_axis != 0 || move_z_axis != 0)
 			{
 				// Send gCode
-				//socket.emit('command', options.port, 'gcode', 'G91 G0 X' + move_x_axis + " Y" + move_y_axis + " Z" + move_z_axis);
-				//socket.emit('command', options.port, 'gcode', 'G90');  // Switch back to absolute coordinates
+				socket.emit('command', options.port, 'gcode', 'G91 G0 X' + move_x_axis + " Y" + move_y_axis + " Z" + move_z_axis);
+				socket.emit('command', options.port, 'gcode', 'G90');  // Switch back to absolute coordinates
 
 				// Debuging
 				//console.log("DPad MOVE: " + move_y_axis + ': ' + move_y_axis + ': ' + move_z_axis);
@@ -587,7 +588,7 @@ module.exports = function(options, callback) {
 		controller.on('dpadUp:hold', function(data) {
 			dpad('Y', true, data)
 		});
-    	controller.on('dpadUp:release', function(data) {
+    controller.on('dpadUp:release', function(data) {
 			move_y_axis = 0;
 		});
 
@@ -598,7 +599,7 @@ module.exports = function(options, callback) {
 		controller.on('dpadDown:hold', function(data) {
 			dpad('Y', false, data)
 		});
-    	controller.on('dpadDown:release', function(data) {
+    controller.on('dpadDown:release', function(data) {
 			move_y_axis = 0;
 		});
 
@@ -609,7 +610,7 @@ module.exports = function(options, callback) {
 		controller.on('dpadRight:hold', function(data) {
 			dpad('X', true, data)
 		});
-    	controller.on('dpadRight:release', function(data) {
+    controller.on('dpadRight:release', function(data) {
 			move_x_axis = 0;
 		});
 
@@ -620,9 +621,9 @@ module.exports = function(options, callback) {
 		controller.on('dpadLeft:hold', function(data) {
 			dpad('X', false, data)
 		});
-		controller.on('dpadLeft:release', function(data) {
-			move_x_axis = 0;
-		});
+    controller.on('dpadLeft:release', function(data) {
+      move_x_axis = 0;
+    });
 
 		// ------------------------------------------
 
@@ -634,7 +635,7 @@ module.exports = function(options, callback) {
 			if (r1 && psx) {
 				socket.emit('command', options.port, 'gcode', 'M3 S1000');
 				spindle = true;
-				console.log('Spindle: ' + spindle);
+				//console.log('Spindle: ' + spindle);
 			}
 		});
 
@@ -643,7 +644,7 @@ module.exports = function(options, callback) {
 			if (!psx && spindle) {
 				socket.emit('command', options.port, 'gcode', 'M5');
 				spindle = false;
-				console.log('Spindle: ' + spindle);
+				//console.log('Spindle: ' + spindle);
 			}
 		});
 
@@ -674,15 +675,15 @@ module.exports = function(options, callback) {
 				ps3_rumble_left = 1; // 0-1 (Rumble left on/off)
 			}
 
-			console.log('L] rightAnalogBump: ' + stick_right + " leftAnalogBump: "+ stick_left);
+			//console.log('L] rightAnalogBump: ' + stick_right + " leftAnalogBump: "+ stick_left);
 
-			
+			/*
 			// Runble Controler Beefly
 			ps3_rumble_left = 1; // 0-1 (Rumble left on/off)
 			setTimeout(function () {
 			    ps3_rumble_left = 0; // 0-1 (Rumble left on/off)
 			}, 510);
-			
+			*/
 		});
 		controller.on('rightAnalogBump:press', function(data) {
 			// Toggle Enable
@@ -696,22 +697,22 @@ module.exports = function(options, callback) {
 				ps3_rumble_left = 1; // 0-1 (Rumble left on/off)
 			}
 
-			console.log('R] rightAnalogBump: ' + stick_right + " leftAnalogBump: "+ stick_left);
+			//console.log('R] rightAnalogBump: ' + stick_right + " leftAnalogBump: "+ stick_left);
 
-			
+			/*
 			// Runble Controler Beefly
 			ps3_rumble_left = 1; // 0-1 (Rumble left on/off)
 			setTimeout(function () {
 			    ps3_rumble_left = 0; // 0-1 (Rumble left on/off)
 			}, 510);
-			
+			*/
 		});
 
 		// - - - - - - - - - - - - - - - - - - - -
 
 		// Analog Sticks
 		controller.on('left:move', function(data) {
-			console.log('left Moved: ' + data.x + ' | ' + Number((data.y * -1) +255));
+			//console.log('left Moved: ' + data.x + ' | ' + Number((data.y * -1) +255));
 			if (stick_left) {
 				left_x = data.x - 128
 				left_y = (data.y * -1) +128
@@ -720,7 +721,7 @@ module.exports = function(options, callback) {
 				left_y = 0;
 			}
 
-			console.log('stick-left: ' +  Number(data.x - 128) + ' [' + right_x + '] | ' +  Number(data.y - 128) + ' [' + right_y + '] | ' + stick_left)
+			//console.log('stick-left: ' +  Number(data.x - 128) + ' [' + right_x + '] | ' +  Number(data.y - 128) + ' [' + right_y + '] | ' + stick_left)
 		});
 		controller.on('right:move', function(data) {
 			//console.log('right Moved: ' + data.x + ' | ' + Number((data.y * -1) +255));
@@ -733,7 +734,7 @@ module.exports = function(options, callback) {
 				right_y = 0;
 			}
 
-			console.log('stick-right: ' + Number(data.x - 128) + ' [' + right_x + '] | ' +  Number(data.y - 128) + ' [' + right_y + '] | ' + stick_right)
+			//console.log('stick-right: ' + Number(data.x - 128) + ' [' + right_x + '] | ' +  Number(data.y - 128) + ' [' + right_y + '] | ' + stick_right)
 		});
 
 		// [Function] map(value, fromLow, fromHigh, toLow, toHigh)   https://www.arduino.cc/en/Reference/Map
@@ -760,11 +761,11 @@ module.exports = function(options, callback) {
 				}
 
 				//!!!!!!!!!!!!!!!!! need to detect if it's in inches or millimetersmm to avoid and overrun in the multiplier this can be done with agreeable status I believe.
-				// socket.emit('command', options.port, 'gcode', 'G21');  // set to millimeters
+				socket.emit('command', options.port, 'gcode', 'G21');  // set to millimeters
 
 				// Move based on stick imput and mapping, need to add exponital curve.
-				//socket.emit('command', options.port, 'gcode', 'G91 G0 X' + map(sum_x, 0, 128, 0.0001, 2).toFixed(4) + ' Y' + map(sum_y, 0, 128, 0.0001, 2).toFixed(4)); // Switch to relative coordinates, Move one unit right in X and one unit right in Y
-				//socket.emit('command', options.port, 'gcode', 'G90');  // Switch back to absolute coordinates
+				socket.emit('command', options.port, 'gcode', 'G91 G0 X' + map(sum_x, 0, 128, 0.0001, 2).toFixed(4) + ' Y' + map(sum_y, 0, 128, 0.0001, 2).toFixed(4)); // Switch to relative coordinates, Move one unit right in X and one unit right in Y
+				socket.emit('command', options.port, 'gcode', 'G90');  // Switch back to absolute coordinates
 				//console.log('setInterval: x' + sum_x + ' y' + sum_y + ' | ' + 'G91 G0 X' + map(sum_x, 0, 128, 0.0001, 2).toFixed(4) + ' Y' + map(sum_y, 0, 128, 0.0001, 2).toFixed(4));
 			}
 		}
@@ -842,13 +843,13 @@ module.exports = function(options, callback) {
 			console.log('connection:change:' + value);
 		});
 
-
+/*
 		//DualShock 3 control rumble and light settings for the controller
 		controller.setExtras({
-			rumbleLeft:  1,   // 0-1 (Rumble left on/off)
-			rumbleRight: 100,   // 0-255 (Rumble right intensity)
-			led: 2 // 2 | 4 | 8 | 16 (Leds 1-4 on/off, bitmasked)		
+			rumbleLeft:  0,   // 0-1 (Rumble left on/off)
+			rumbleRight: 0,   // 0-255 (Rumble right intensity)
+			led: 2 // 2 | 4 | 8 | 16 (Leds 1-4 on/off, bitmasked)
 		});
-
+*/
 	}
 };
