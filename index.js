@@ -587,7 +587,7 @@ module.exports = function(options, callback) {
 		controller.on('dpadUp:hold', function(data) {
 			dpad('Y', true, data)
 		});
-    controller.on('dpadUp:release', function(data) {
+    	controller.on('dpadUp:release', function(data) {
 			move_y_axis = 0;
 		});
 
@@ -598,7 +598,7 @@ module.exports = function(options, callback) {
 		controller.on('dpadDown:hold', function(data) {
 			dpad('Y', false, data)
 		});
-    controller.on('dpadDown:release', function(data) {
+    	controller.on('dpadDown:release', function(data) {
 			move_y_axis = 0;
 		});
 
@@ -609,7 +609,7 @@ module.exports = function(options, callback) {
 		controller.on('dpadRight:hold', function(data) {
 			dpad('X', true, data)
 		});
-    controller.on('dpadRight:release', function(data) {
+    	controller.on('dpadRight:release', function(data) {
 			move_x_axis = 0;
 		});
 
@@ -620,9 +620,9 @@ module.exports = function(options, callback) {
 		controller.on('dpadLeft:hold', function(data) {
 			dpad('X', false, data)
 		});
-    controller.on('dpadLeft:release', function(data) {
-      move_x_axis = 0;
-    });
+		controller.on('dpadLeft:release', function(data) {
+			move_x_axis = 0;
+		});
 
 		// ------------------------------------------
 
@@ -634,7 +634,7 @@ module.exports = function(options, callback) {
 			if (r1 && psx) {
 				socket.emit('command', options.port, 'gcode', 'M3 S1000');
 				spindle = true;
-				//console.log('Spindle: ' + spindle);
+				console.log('Spindle: ' + spindle);
 			}
 		});
 
@@ -643,7 +643,7 @@ module.exports = function(options, callback) {
 			if (!psx && spindle) {
 				socket.emit('command', options.port, 'gcode', 'M5');
 				spindle = false;
-				//console.log('Spindle: ' + spindle);
+				console.log('Spindle: ' + spindle);
 			}
 		});
 
@@ -674,15 +674,15 @@ module.exports = function(options, callback) {
 				ps3_rumble_left = 1; // 0-1 (Rumble left on/off)
 			}
 
-			//console.log('L] rightAnalogBump: ' + stick_right + " leftAnalogBump: "+ stick_left);
+			console.log('L] rightAnalogBump: ' + stick_right + " leftAnalogBump: "+ stick_left);
 
-			/*
+			
 			// Runble Controler Beefly
 			ps3_rumble_left = 1; // 0-1 (Rumble left on/off)
 			setTimeout(function () {
 			    ps3_rumble_left = 0; // 0-1 (Rumble left on/off)
 			}, 510);
-			*/
+			
 		});
 		controller.on('rightAnalogBump:press', function(data) {
 			// Toggle Enable
@@ -696,15 +696,15 @@ module.exports = function(options, callback) {
 				ps3_rumble_left = 1; // 0-1 (Rumble left on/off)
 			}
 
-			//console.log('R] rightAnalogBump: ' + stick_right + " leftAnalogBump: "+ stick_left);
+			console.log('R] rightAnalogBump: ' + stick_right + " leftAnalogBump: "+ stick_left);
 
-			/*
+			
 			// Runble Controler Beefly
 			ps3_rumble_left = 1; // 0-1 (Rumble left on/off)
 			setTimeout(function () {
 			    ps3_rumble_left = 0; // 0-1 (Rumble left on/off)
 			}, 510);
-			*/
+			
 		});
 
 		// - - - - - - - - - - - - - - - - - - - -
@@ -733,7 +733,7 @@ module.exports = function(options, callback) {
 				right_y = 0;
 			}
 
-			//console.log('stick-right: ' + Number(data.x - 128) + ' [' + right_x + '] | ' +  Number(data.y - 128) + ' [' + right_y + '] | ' + stick_right)
+			console.log('stick-right: ' + Number(data.x - 128) + ' [' + right_x + '] | ' +  Number(data.y - 128) + ' [' + right_y + '] | ' + stick_right)
 		});
 
 		// [Function] map(value, fromLow, fromHigh, toLow, toHigh)   https://www.arduino.cc/en/Reference/Map
@@ -765,7 +765,7 @@ module.exports = function(options, callback) {
 				// Move based on stick imput and mapping, need to add exponital curve.
 				//socket.emit('command', options.port, 'gcode', 'G91 G0 X' + map(sum_x, 0, 128, 0.0001, 2).toFixed(4) + ' Y' + map(sum_y, 0, 128, 0.0001, 2).toFixed(4)); // Switch to relative coordinates, Move one unit right in X and one unit right in Y
 				//socket.emit('command', options.port, 'gcode', 'G90');  // Switch back to absolute coordinates
-				console.log('setInterval: x' + sum_x + ' y' + sum_y + ' | ' + 'G91 G0 X' + map(sum_x, 0, 128, 0.0001, 2).toFixed(4) + ' Y' + map(sum_y, 0, 128, 0.0001, 2).toFixed(4));
+				//console.log('setInterval: x' + sum_x + ' y' + sum_y + ' | ' + 'G91 G0 X' + map(sum_x, 0, 128, 0.0001, 2).toFixed(4) + ' Y' + map(sum_y, 0, 128, 0.0001, 2).toFixed(4));
 			}
 		}
 
