@@ -60,7 +60,7 @@ module.exports = function(options, callback) {
     // [Function] check for controller to conect (show up in devices), then start services. Kill services on disconect.
 	setInterval(checkController, 3*1000);
 	function checkController(socket, controller) {
-		console.log('Checking Controller Status');
+		//console.log('Checkign Controller Status');
 
 		// Get HID Devices
 		var devices = HID.devices();
@@ -68,10 +68,10 @@ module.exports = function(options, callback) {
 		// Find DualShock 3 Controller HID
 		devices.forEach(function(device) {
 			// List Devices
-			console.log(device.vendorId + " | " + device.productId);
+			//console.log(device.vendorId + " | " + device.productId);
 
 			// Detect DualShock 3 Controller HID
-			if (!pendant_started && (device.vendorId == 1356 && device.productId == 2508)) {
+			if (!pendant_started && (device.vendorId == 1356 && device.productId == 616)) {
 				console.log("Pendant Connected");
 
 				// Start Socket Connection & Controller Conection
@@ -158,9 +158,9 @@ module.exports = function(options, callback) {
 		controller = dualShock(
 			 {
 				  //you can use a ds4 by uncommenting this line.
-				  config: "dualShock4-alternate-driver",
+				  //config: "dualshock4-generic-driver",
 				  //if using ds4 comment this line.
-				  // config : "dualShock3",
+				  config : "dualShock3",
 				  //smooths the output from the acelerometers (moving averages) defaults to true
 				  accelerometerSmoothing : true,
 				  //smooths the output from the analog sticks (moving averages) defaults to false
@@ -192,22 +192,22 @@ module.exports = function(options, callback) {
 		var psx = false;
 		controller.on('psxButton:press', function(data) {
 			psx = true;
-			console.log(data + '|' + psx);
+			//console.log(data + '|' + psx);
 		});
 		controller.on('psxButton:release', function(data) {
 			psx = false;
-			console.log(data + '|' + psx);
+			//console.log(data + '|' + psx);
 		});
 
 		// L1
 		var l1 = false;
 		controller.on('l1:press', function(data) {
 			l1 = true;
-			console.log(data + '|' + l1);
+			//console.log(data + '|' + l1);
 		});
 		controller.on('l1:release', function(data) {
 			l1 = false;
-			console.log(data + '|' + l1);
+			//console.log(data + '|' + l1);
 		});
 
 		// R1
