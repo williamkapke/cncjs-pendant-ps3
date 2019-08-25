@@ -30,16 +30,16 @@
   "homepage": "https://github.com/cncjs/cncjs-pendant-ps3#readme",
   "dependencies": {
     "commander": "^2.9.0",
+    "dualshock-controller": "^1.1.2",
     "inquirer": "^3.0.1",
     "jsonwebtoken": "^7.2.1",
     "lodash.get": "^4.4.2",
-    "serialport": "^6.2.2 --build-from-source",
-    "socket.io-client": "^1.7.2",
-    "vorpal": "^1.11.4",
-    "dualshock-controller": "^1.1.2",
     "node-gyp": "^3.5.0",
+    "node-hid": "^0.7.9 --driver=hidraw --build-from-source",
     "node-pre-gyp": "^0.6.33",
-    "node-hid": "^0.7.9 --driver=hidraw --build-from-source"
+    "serialport": "^6.2.2",
+    "socket.io-client": "^1.7.2",
+    "vorpal": "^1.11.4"
   },
   "devDependencies": {}
 }
