@@ -797,17 +797,17 @@ module.exports = function(options, callback) {
 		// ------------------------------------------
 
 		// Send Extras Updates
-		setInterval(updateControllerExtras, 500);
-		function updateControllerExtras() {
-			controller.setExtras({
-				rumbleLeft:  ps3_rumble_left,   // 0-1 (Rumble left on/off)
-				rumbleRight: ps3_rumble_right,   // 0-255 (Rumble right intensity)
-				led: ps3_led // 2 | 4 | 8 | 16 (Leds 1-4 on/off, bitmasked)
-			});
+		// setInterval(updateControllerExtras, 500);
+		// function updateControllerExtras() {
+		// 	controller.setExtras({
+		// 		rumbleLeft:  ps3_rumble_left,   // 0-1 (Rumble left on/off)
+		// 		rumbleRight: ps3_rumble_right,   // 0-255 (Rumble right intensity)
+		// 		led: ps3_led // 2 | 4 | 8 | 16 (Leds 1-4 on/off, bitmasked)
+		// 	});
 
-			//console.log("ps3_rumble_left: " + ps3_rumble_left);
-			//console.log("ps3_rumble_right: " + ps3_rumble_right);
-		}
+		// 	//console.log("ps3_rumble_left: " + ps3_rumble_left);
+		// 	//console.log("ps3_rumble_right: " + ps3_rumble_right);
+		// }
 
 		//controller status
 		//as of version 0.6.2 you can get the battery %, if the controller is connected and if the controller is charging
