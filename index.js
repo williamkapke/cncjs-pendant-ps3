@@ -264,7 +264,7 @@ module.exports = function(options, callback) {
 		// Cyclestart
 		controller.on('start:press', function(data) {
 			if (!psx) {
-				socket.emit('command', options.port, '$X');
+				socket.emit('command', options.port, 'gcode', 'X');
 			}
 		});
 
