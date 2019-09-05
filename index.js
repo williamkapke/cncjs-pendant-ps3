@@ -280,7 +280,7 @@ module.exports = function(options, callback) {
 
 		// Start
 		controller.on('triangle:press', function(data) {
-			if (!r1 && !l1 && !psx) {
+			if (!r1 && !r2 && !l1 && !psx) {
 				socket.emit('command', options.port, 'start');
 				//console.log('cyclestart:' + data);
 			}
@@ -288,7 +288,7 @@ module.exports = function(options, callback) {
 
 		// Stop
 		controller.on('square:press', function(data) {
-			if (!r1 && !l1 && !psx) {
+			if (!r1 && !r2 && !l1 && !psx) {
 				socket.emit('command', options.port, 'stop');
 				//console.log('feedhold:' + data);
 			}
@@ -297,7 +297,7 @@ module.exports = function(options, callback) {
 
 		// Pause
 		controller.on('circle:press', function(data) {
-			if (!r1 && !l1 && !psx) {
+			if (!r1 && !r2 && !l1 && !psx) {
 				socket.emit('command', options.port, 'pause');
 				//console.log('pause:' + data);
 			}
@@ -305,7 +305,7 @@ module.exports = function(options, callback) {
 
 		// Resume
 		controller.on('x:press', function(data) {
-			if (!r1 && !l1 && !psx) {
+			if (!r1 && !r2 && !l1 && !psx) {
 				socket.emit('command', options.port, 'resume');
 				//console.log('unlock:' + data);
 			}
