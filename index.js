@@ -249,14 +249,14 @@ module.exports = function(options, callback) {
 		// Unlock
 		controller.on('start:press', function(data) {
 			if (psx) {
-				socket.emit('command', options.port, 'unlock');
+				socket.emit('command', options.port, 'unlock');  
 			}
 		});
 
 		// Reset
 		controller.on('select:press', function(data) {
 			if (psx) {
-				socket.emit('command', options.port, 'reset');
+				socket.emit('command', options.port, '0x18');
 			}
 		});
 
@@ -380,38 +380,38 @@ module.exports = function(options, callback) {
 			}
 		});
 
-/*
+
 		// ------------------------------------------
 		// R2
 
-		// Triangle
+		// Triangle Zero Work Position Z
 		controller.on('triangle:press', function(data) {
 			if (r2) {
-				socket.emit('command', options.port, '');
+				socket.emit('command', options.port, 'gcode', 'G10 L20 P1 Z0');
 			}
 		});
 
-		// Square
+		// Square Zero Work Position Y
 		controller.on('square:press', function(data) {
 			if (r2) {
-				socket.emit('command', options.port, '');
+				socket.emit('command', options.port, 'gcode', 'G10 L20 P1 Y0');
 			}
 		});
 
 		// Circle
 		controller.on('circle:press', function(data) {
 			if (r2) {
-				socket.emit('command', options.port, '');
+				socket.emit('command', options.port, 'gcode', 'G0 X0 Y0 Z0');
 			}
 		});
 
-		// X
+		// X Zero Work Position X
 		controller.on('x:press', function(data) {
 			if (r2) {
-				socket.emit('command', options.port, '');
+				socket.emit('command', options.port, 'gcode', 'G10 L20 P1 X0');
 			}
 		});
-*/
+
 
 
 		// ------------------------------------------
@@ -633,7 +633,7 @@ module.exports = function(options, callback) {
 		// Start Spindle
 		controller.on('r2:press', function(data) {
 			if (r1 && psx) {
-				socket.emit('command', options.port, 'gcode', 'M3 S1000');
+				socket.emit('command', options.port, 'gcode', 'M3 S5000');
 				spindle = true;
 				//console.log('Spindle: ' + spindle);
 			}
