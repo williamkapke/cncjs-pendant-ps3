@@ -795,7 +795,7 @@ module.exports = function(options, callback) {
 		controller.on('upDown:motion', function (data) {
 			 //...doStuff();
 		});
-*/
+
 		// ------------------------------------------
 
 		// Send Extras Updates
@@ -810,7 +810,7 @@ module.exports = function(options, callback) {
 			//console.log("ps3_rumble_left: " + ps3_rumble_left);
 			//console.log("ps3_rumble_right: " + ps3_rumble_right);
 		}
-
+*/
 		//controller status
 		//as of version 0.6.2 you can get the battery %, if the controller is connected and if the controller is charging
 		var battery_level = 0;
