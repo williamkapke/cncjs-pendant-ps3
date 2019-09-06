@@ -246,75 +246,67 @@ module.exports = function(options, callback) {
 		// ------------------------------------------
 		// https://github.com/cncjs/cncjs/blob/master/src/web/lib/controller.js
 
-		// PSX + Start
-		// Home
+		// Unlock
 		controller.on('start:press', function(data) {
 			if (psx) {
-				socket.emit('command', options.port, 'gcode', 'G0 X0 Y0 Z0');
+				socket.emit('command', options.port, 'unlock');
 			}
 		});
 
-		// PSX + Select
-		// Soft-Reset
+		// Reset
 		controller.on('select:press', function(data) {
 			if (psx) {
-				// ASCII Reset Command
-				socket.emit('command', options.port, '0x18');
+				socket.emit('command', options.port, 'reset');
 			}
 		});
 
-		// Start
-		// Cycle Start / Resume
+
+		// Cyclestart
 		controller.on('start:press', function(data) {
 			if (!psx) {
-				socket.emit('command', options.port, '~');
+				socket.emit('command', options.port, 'cyclestart');
 			}
 		});
 
-		// Select
 		// Feedhold
 		controller.on('select:press', function(data) {
 			if (!psx) {
-				socket.emit('command', options.port, '!');
+				socket.emit('command', options.port, 'feedhold');
 			}
 		});
 
 		// ------------------------------------------
 		// Default
 
-		// Triangle
-		// Status Report Query
+		// Start
 		controller.on('triangle:press', function(data) {
 			if (!r1 && !r2 && !l1 && !psx) {
-				socket.emit('command', options.port, '?');
+				socket.emit('command', options.port, 'start');
 				//console.log('cyclestart:' + data);
 			}
 		});
 
-		// Square
-		// Run homing cycle
+		// Stop
 		controller.on('square:press', function(data) {
 			if (!r1 && !r2 && !l1 && !psx) {
-				socket.emit('command', options.port, 'gcode', '$H');
+				socket.emit('command', options.port, 'stop');
 				//console.log('feedhold:' + data);
 			}
 		});
 
 
-		// Circle
-		// Jog Cancel
+		// Pause
 		controller.on('circle:press', function(data) {
 			if (!r1 && !r2 && !l1 && !psx) {
-				socket.emit('command', options.port, '0x85');
+				socket.emit('command', options.port, 'pause');
 				//console.log('pause:' + data);
 			}
 		});
 
-		// X
-		// Kill alarm lock
+		// Resume
 		controller.on('x:press', function(data) {
 			if (!r1 && !r2 && !l1 && !psx) {
-				socket.emit('command', options.port, 'gcode', '$X');
+				socket.emit('command', options.port, 'resume');
 				//console.log('unlock:' + data);
 			}
 		});
@@ -388,18 +380,19 @@ module.exports = function(options, callback) {
 			}
 		});
 
-
 		// ------------------------------------------
 		// R2
 
-		// Triangle Zero Work Position Z
+		// Triangle
+		// Zero Work Position Z
 		controller.on('triangle:press', function(data) {
 			if (r2) {
 				socket.emit('command', options.port, 'gcode', 'G10 L20 P1 Z0');
 			}
 		});
 
-		// Square Zero Work Position Y
+		// Square
+		// Zero Work Position Y
 		controller.on('square:press', function(data) {
 			if (r2) {
 				socket.emit('command', options.port, 'gcode', 'G10 L20 P1 Y0');
@@ -407,19 +400,20 @@ module.exports = function(options, callback) {
 		});
 
 		// Circle
+		// Home Position XYZ
 		controller.on('circle:press', function(data) {
 			if (r2) {
 				socket.emit('command', options.port, 'gcode', 'G0 X0 Y0 Z0');
 			}
 		});
 
-		// X Zero Work Position X
+		// X
+		// Zero Work Position X
 		controller.on('x:press', function(data) {
 			if (r2) {
 				socket.emit('command', options.port, 'gcode', 'G10 L20 P1 X0');
 			}
 		});
-
 
 
 		// ------------------------------------------
@@ -805,17 +799,17 @@ module.exports = function(options, callback) {
 		// ------------------------------------------
 
 		// Send Extras Updates
-		// setInterval(updateControllerExtras, 500);
-		// function updateControllerExtras() {
-		// 	controller.setExtras({
-		// 		rumbleLeft:  ps3_rumble_left,   // 0-1 (Rumble left on/off)
-		// 		rumbleRight: ps3_rumble_right,   // 0-255 (Rumble right intensity)
-		// 		led: ps3_led // 2 | 4 | 8 | 16 (Leds 1-4 on/off, bitmasked)
-		// 	});
+		setInterval(updateControllerExtras, 500);
+		function updateControllerExtras() {
+			controller.setExtras({
+				rumbleLeft:  ps3_rumble_left,   // 0-1 (Rumble left on/off)
+				rumbleRight: ps3_rumble_right,   // 0-255 (Rumble right intensity)
+				led: ps3_led // 2 | 4 | 8 | 16 (Leds 1-4 on/off, bitmasked)
+			});
 
-		// 	//console.log("ps3_rumble_left: " + ps3_rumble_left);
-		// 	//console.log("ps3_rumble_right: " + ps3_rumble_right);
-		// }
+			//console.log("ps3_rumble_left: " + ps3_rumble_left);
+			//console.log("ps3_rumble_right: " + ps3_rumble_right);
+		}
 
 		//controller status
 		//as of version 0.6.2 you can get the battery %, if the controller is connected and if the controller is charging
