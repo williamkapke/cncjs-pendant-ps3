@@ -306,7 +306,7 @@ module.exports = function(options, callback) {
 		// X
 		controller.on('x:press', function(data) {
 			if (!r1 && !r2 && !l1 && !psx) {
-				socket.emit('command', options.port, 'gcode', '0x85');
+				socket.emit('command', options.port, 'gcode', 0x85);
 				console.log('jogcancel:' + data);
 			}
 		});
