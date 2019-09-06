@@ -281,7 +281,7 @@ module.exports = function(options, callback) {
 		// Start
 		controller.on('triangle:press', function(data) {
 			if (!r1 && !r2 && !l1 && !psx) {
-				socket.emit('command', options.port, 'start');
+				//socket.emit('command', options.port, 'start');
 				//console.log('cyclestart:' + data);
 			}
 		});
@@ -289,7 +289,7 @@ module.exports = function(options, callback) {
 		// Stop
 		controller.on('square:press', function(data) {
 			if (!r1 && !r2 && !l1 && !psx) {
-				socket.emit('command', options.port, 'stop');
+				//socket.emit('command', options.port, 'stop');
 				//console.log('feedhold:' + data);
 			}
 		});
@@ -298,16 +298,16 @@ module.exports = function(options, callback) {
 		// Pause
 		controller.on('circle:press', function(data) {
 			if (!r1 && !r2 && !l1 && !psx) {
-				socket.emit('command', options.port, 'pause');
+				//socket.emit('command', options.port, 'pause');
 				//console.log('pause:' + data);
 			}
 		});
 
-		// Resume
+		// Jog Cancel
 		controller.on('x:press', function(data) {
 			if (!r1 && !r2 && !l1 && !psx) {
-				socket.emit('command', options.port, 'resume');
-				//console.log('unlock:' + data);
+				socket.emit('command', options.port, '0x85');
+				//console.log('jogcancel:' + data);
 			}
 		});
 
@@ -440,7 +440,7 @@ module.exports = function(options, callback) {
 			}
 		});
 
-		// Home
+		// Run Homing Cycle
 		controller.on('x:press', function(data) {
 			if (psx) {
 				socket.emit('command', options.port, 'homing');
