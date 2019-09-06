@@ -306,8 +306,8 @@ module.exports = function(options, callback) {
 		// Jog Cancel
 		controller.on('x:press', function(data) {
 			if (!r1 && !r2 && !l1 && !psx) {
-				socket.emit('command', options.port, '0x85');
-				//console.log('jogcancel:' + data);
+				socket.emit('command', options.port, 0x85);
+				console.log('jogcancel:' + data);
 			}
 		});
 
