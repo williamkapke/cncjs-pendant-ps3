@@ -278,7 +278,7 @@ module.exports = function(options, callback) {
 		// ------------------------------------------
 		// Default
 
-		// Start
+		// Triangle
 		controller.on('triangle:press', function(data) {
 			if (!r1 && !r2 && !l1 && !psx) {
 				//socket.emit('command', options.port, 'start');
@@ -286,7 +286,7 @@ module.exports = function(options, callback) {
 			}
 		});
 
-		// Stop
+		// Square
 		controller.on('square:press', function(data) {
 			if (!r1 && !r2 && !l1 && !psx) {
 				//socket.emit('command', options.port, 'stop');
@@ -295,7 +295,7 @@ module.exports = function(options, callback) {
 		});
 
 
-		// Pause
+		// Circle
 		controller.on('circle:press', function(data) {
 			if (!r1 && !r2 && !l1 && !psx) {
 				//socket.emit('command', options.port, 'pause');
@@ -303,10 +303,10 @@ module.exports = function(options, callback) {
 			}
 		});
 
-		// Jog Cancel
+		// X
 		controller.on('x:press', function(data) {
 			if (!r1 && !r2 && !l1 && !psx) {
-				socket.emit('command', options.port, 0x85);
+				socket.emit('command', options.port, 'gcode', '0x85');
 				console.log('jogcancel:' + data);
 			}
 		});
