@@ -256,6 +256,7 @@ module.exports = function(options, callback) {
 		// Reset
 		controller.on('select:press', function(data) {
 			if (psx) {
+				// ASCII Reset Command
 				socket.emit('command', options.port, '0x18');
 			}
 		});
