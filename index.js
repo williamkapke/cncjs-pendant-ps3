@@ -260,7 +260,6 @@ module.exports = function(options, callback) {
 			}
 		});
 
-
 		// Cyclestart
 		controller.on('start:press', function(data) {
 			if (!psx) {
@@ -281,16 +280,14 @@ module.exports = function(options, callback) {
 		// Triangle
 		controller.on('triangle:press', function(data) {
 			if (!r1 && !r2 && !l1 && !psx) {
-				//socket.emit('command', options.port, 'start');
-				//console.log('cyclestart:' + data);
+				//console.log('triangle:press:' + data);
 			}
 		});
 
 		// Square
 		controller.on('square:press', function(data) {
 			if (!r1 && !r2 && !l1 && !psx) {
-				//socket.emit('command', options.port, 'stop');
-				//console.log('feedhold:' + data);
+				//console.log('square:press:' + data);
 			}
 		});
 
@@ -298,16 +295,14 @@ module.exports = function(options, callback) {
 		// Circle
 		controller.on('circle:press', function(data) {
 			if (!r1 && !r2 && !l1 && !psx) {
-				//socket.emit('command', options.port, 'pause');
-				//console.log('pause:' + data);
+				//console.log('circle:press:' + data);
 			}
 		});
 
 		// X
 		controller.on('x:press', function(data) {
 			if (!r1 && !r2 && !l1 && !psx) {
-				socket.emit('command', options.port, 'gcode', 0x85);
-				console.log('jogcancel:' + data);
+				//console.log('x:press:' + data);
 			}
 		});
 
