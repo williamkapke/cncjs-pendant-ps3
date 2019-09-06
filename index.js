@@ -246,14 +246,16 @@ module.exports = function(options, callback) {
 		// ------------------------------------------
 		// https://github.com/cncjs/cncjs/blob/master/src/web/lib/controller.js
 
-		// Unlock
+		// PSX + Start
+		// Home
 		controller.on('start:press', function(data) {
 			if (psx) {
-				socket.emit('command', options.port, 'unlock');  
+				socket.emit('command', options.port, 'gcode', 'G0 X0 Y0 Z0');
 			}
 		});
 
-		// Reset
+		// PSX + Select
+		// Soft-Reset
 		controller.on('select:press', function(data) {
 			if (psx) {
 				// ASCII Reset Command
@@ -261,53 +263,58 @@ module.exports = function(options, callback) {
 			}
 		});
 
-
-		// Cyclestart
+		// Start
+		// Cycle Start / Resume
 		controller.on('start:press', function(data) {
 			if (!psx) {
-				socket.emit('command', options.port, 'gcode', 'X');
+				socket.emit('command', options.port, '~');
 			}
 		});
 
+		// Select
 		// Feedhold
 		controller.on('select:press', function(data) {
 			if (!psx) {
-				socket.emit('command', options.port, 'feedhold');
+				socket.emit('command', options.port, '!');
 			}
 		});
 
 		// ------------------------------------------
 		// Default
 
-		// Start
+		// Triangle
+		// Status Report Query
 		controller.on('triangle:press', function(data) {
 			if (!r1 && !r2 && !l1 && !psx) {
-				socket.emit('command', options.port, 'start');
+				socket.emit('command', options.port, '?');
 				//console.log('cyclestart:' + data);
 			}
 		});
 
-		// Stop
+		// Square
+		// Run homing cycle
 		controller.on('square:press', function(data) {
 			if (!r1 && !r2 && !l1 && !psx) {
-				socket.emit('command', options.port, 'stop');
+				socket.emit('command', options.port, 'gcode', '$H');
 				//console.log('feedhold:' + data);
 			}
 		});
 
 
-		// Pause
+		// Circle
+		// Jog Cancel
 		controller.on('circle:press', function(data) {
 			if (!r1 && !r2 && !l1 && !psx) {
-				socket.emit('command', options.port, 'pause');
+				socket.emit('command', options.port, '0x85');
 				//console.log('pause:' + data);
 			}
 		});
 
-		// Resume
+		// X
+		// Kill alarm lock
 		controller.on('x:press', function(data) {
 			if (!r1 && !r2 && !l1 && !psx) {
-				socket.emit('command', options.port, 'resume');
+				socket.emit('command', options.port, 'gcode', '$X');
 				//console.log('unlock:' + data);
 			}
 		});
