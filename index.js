@@ -25,6 +25,7 @@ const dualShock = require('dualshock-controller'); // https://www.npmjs.com/pack
 // =====================================================
 const cncrc = path.resolve(getUserHome(), '.cncrc');
 const config = JSON.parse(fs.readFileSync(cncrc, 'utf8'));
+console.log(config.dualshockPendantEnabled);
 
 // [Functions]
 // =====================================================
@@ -385,7 +386,6 @@ module.exports = function(options, callback) {
 		// Triangle
 		// Zero Work Position Z
 		controller.on('triangle:press', function(data) {
-			console.log(config.dualshockPendantEnabled);
 			if (r2) {
 				socket.emit('command', options.port, 'gcode', 'G10 L20 P1 Z0');
 			}
@@ -422,8 +422,6 @@ module.exports = function(options, callback) {
 		// M7
 		controller.on('triangle:press', function(data) {
 			if (psx) {
-				
-	            options.secret = config.secret;
 				socket.emit('command', options.port, 'gcode', 'M7');
 			}
 		});
