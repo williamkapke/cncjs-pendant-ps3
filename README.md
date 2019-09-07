@@ -1,19 +1,20 @@
-# Dual Shock 3 Remote Pendant for CNCjs on a Raspberry Pi
+# Dual Shock 3 Remote Pendant for CNCjs
 
 I purchased an offline controller for my woodpecker cnc board and was quickly disapointed that I could not use CNCjs while it was connected. It also lacked controls for zeroing out the work surface and was tiny. I found cnc-pendant-js, which had almost all the commmands I wanted and some open buttons.
 
 This fork is a modified version of [cncjs-pendant-ps3]() where will find detailed instructions on connecting your [Dualshock 3 controller](https://www.playstation.com/en-us/explore/accessories/dualshock-3-ps3/) via wire and bluetooth.  I got a cheap clone "P3" controller working.
 
-For about the same price as the offline controller I think the dualshock 3 is a much more comfortable and capable pendant option.
+For about the same price as the offline controller I think the dualshock 3 is a much more comfortable and capable pendant option. I added the R2 modified commands for zeroing out the axes and going to the home position to the empty R2 modified button commands. 
 
+I am really starting to like the controller layout from cncjs-pendant-ps3 and can now do most of what I need with the controller. I may add the Z probe command to one of the PSX modified buttons (+P on the button map) that are currently mapped to cooling functions that are unused on my machine.
 
 ![Button Map](images/Button_Map.jpg)
 
- [PS3 CNC Control Button Map](https://docs.google.com/drawings/d/1PdNYWQexs-ckQcoG5lmz6B-brYfwW1SJI2Fqjip_APQ/edit?usp=sharing)
+ [PS3 CNC Control Button Map Google Drawing](https://docs.google.com/drawings/d/1PdNYWQexs-ckQcoG5lmz6B-brYfwW1SJI2Fqjip_APQ/edit?usp=sharing)
 
 ## Installation Instructions 
 
-CNCjs currently runs best on node version 8, these instructions assume you have NPM and NVM installed. Get started by setting the version of node and installing some required packages for bluetooth and building packages.
+CNCjs currently runs best on node version 8, these instructions assume you have NPM and NVM installed. Get started by setting the version of node and installing some required packages for bluetooth and building packages. 
 
 ### Install Node v8 and dualshock-controller and cncjs-pendant-ps3 node apps locally
 ```
