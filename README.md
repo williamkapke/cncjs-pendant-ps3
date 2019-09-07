@@ -1,15 +1,14 @@
 # cncjs-pendant-ps3
 Dual Shock / PS3 Bluetooth Remote Pendant for CNCjs
 
-Use [Playstation 3 Controller](https://www.playstation.com/en-us/explore/accessories/dualshock-3-ps3/) wirelessly over bluetooth to control CNC from the host device (raspberry pi). [PS3 CNC Control Button Map](https://docs.google.com/drawings/d/1DMzfBk5DSvjJ082FrerrfmpL19-pYAOcvcmTbZJJsvs/edit?usp=sharing)
+Use [Playstation 3 Controller](https://www.playstation.com/en-us/explore/accessories/dualshock-3-ps3/) wirelessly over bluetooth to control a CNC from the host device (raspberry pi). [PS3 CNC Control Button Map](https://docs.google.com/drawings/d/1PdNYWQexs-ckQcoG5lmz6B-brYfwW1SJI2Fqjip_APQ/edit?usp=sharing)
 
 [Remote Pendant (Playstation 3 Dualshock Controller / SIXAXIS Controller)](https://github.com/cheton/cnc/issues/103)
 
-Using a wireless game controller (like a PS3 controller) seems to be one of the lowest cost & simplest solution method. See related issue [#103](https://github.com/cheton/cnc/issues/103)
-
 ## Playstation Controller Setup ( general guide to connect hardware & setup )
 
-Here is what I have figured out so far for PS3 on Raspberry PI 3 w/ integrated bluetooth.
+Here is what I have figured out so far for PS3 on Raspberry PI 3 w/ integrated bluetooth.]
+
 The bellow just shows how to get PS3 controller connected.
 
 
@@ -83,16 +82,6 @@ ls /dev/input
 
 ### Get Battery Level
 `cat "/sys/class/power_supply/sony_controller_battery_64:d4:bd:b3:9e:66/capacity"`
-
-
-### Joystick Application
-```
-# Install
-sudo apt-get -y install joystick
-
-# Usage / Test
-jstest /dev/input/js0
-```
 
 ----------------------------------------
 
