@@ -428,6 +428,8 @@ module.exports = function(options, callback) {
 		// M7 or Custom mapped command
 		controller.on('triangle:press', function(data) {
 			if (psx) {
+				console.log("customButtonMapping: " + customButtonMapping);
+				console.log(config.psxTriangle);
 				if(customButtonMapping && config.hasOwnProperty('psxTriangle')){
 					console.log("Trying to send custom command: " + config.psxTriangle)
 					socket.emit('command', options.port, 'gcode', config.psxTriangle);
@@ -828,7 +830,7 @@ module.exports = function(options, callback) {
 		//as of version 0.6.2 you can get the battery %, if the controller is connected and if the controller is charging
 		var battery_level = 0;
 		controller.on('battery:change', function (value) {
-			console.log('battery:change:' + value);
+			// console.log('battery:change:' + value);
 
 			// Set LEDs
 			switch(value) {
