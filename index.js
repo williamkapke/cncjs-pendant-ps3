@@ -34,7 +34,7 @@ const config = JSON.parse(fs.readFileSync(cncrc, 'utf8'));
 // [Functions]
 // =====================================================
 // Button Mapping
-const customButtonMapping = false;
+var customButtonMapping = false;
 if(config.hasOwnProperty('dualshockPendantCustomButtons')) {
 	customButtonMapping = config.customButtonMapping;
 }
