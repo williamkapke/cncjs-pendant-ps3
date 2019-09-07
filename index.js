@@ -417,13 +417,11 @@ module.exports = function(options, callback) {
 
 
 		// ------------------------------------------
-		// PSX
+		// PSX - all 4 buttons can be mapped in .cncrc
 
-		// M7 or Custom mapped command
+		// M7 or custom mapped command
 		controller.on('triangle:press', function(data) {
 			if (psx) {
-				console.log(config.hasOwnProperty('psxTriangle'));
-				console.log(config.psxTriangle);
 				if(config.hasOwnProperty('psxTriangle')){
 					console.log("Trying to send custom command: " + config.psxTriangle)
 					socket.emit('command', options.port, 'gcode', config.psxTriangle);
@@ -435,24 +433,45 @@ module.exports = function(options, callback) {
 			}
 		});
 
-		// M9
+		// M9 or custom mapped command
 		controller.on('square:press', function(data) {
 			if (psx) {
-				socket.emit('command', options.port, 'gcode', 'M9');
+				if(config.hasOwnProperty('psxSquare')){
+					console.log("Trying to send custom command: " + config.psxSquare)
+					socket.emit('command', options.port, 'gcode', config.psxSquare);
+				}
+				else {
+					// default M9 command
+					socket.emit('command', options.port, 'gcode', 'M9');
+				}
 			}
 		});
 
 		// M8
 		controller.on('circle:press', function(data) {
 			if (psx) {
-				socket.emit('command', options.port, 'gcode', 'M8');
+				if(config.hasOwnProperty('psxCircle')){
+					console.log("Trying to send custom command: " + config.psxCircle)
+					socket.emit('command', options.port, 'gcode', config.psxCircle);
+				}
+				else {
+					// default M8 command
+					socket.emit('command', options.port, 'gcode', 'M8');
+				}
 			}
 		});
 
-		// Run Homing Cycle
+		// Run Homing Cycle or custom mapped command
 		controller.on('x:press', function(data) {
 			if (psx) {
-				socket.emit('command', options.port, 'homing');
+				if(config.hasOwnProperty('psxX')){
+					console.log("Trying to send custom command: " + config.psxX)
+					socket.emit('command', options.port, 'gcode', config.psxX);
+				}
+				else {
+					// default homing command
+					socket.emit('command', options.port, 'homing');
+				}
 			}
 		});
 
