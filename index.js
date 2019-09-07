@@ -427,8 +427,9 @@ module.exports = function(options, callback) {
 		// M7 or Custom mapped command
 		controller.on('triangle:press', function(data) {
 			if (psx) {
-				if(customButtonMapping && config.customButtonMap.hasOwnProperty('psxTriangle')){
-					socket.emit('command', options.port, 'gcode', config.customButtonMap.psxTriangle);
+				if(customButtonMapping && config.hasOwnProperty('psxTriangle')){
+					console.log("Trying to send custom command:", config.psxTriangle)
+					socket.emit('command', options.port, 'gcode', config.psxTriangle);
 				}
 				else {
 					// default M7 command
