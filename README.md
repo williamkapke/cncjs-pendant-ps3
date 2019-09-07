@@ -1,6 +1,6 @@
 # Dualshock Remote Pendant for CNCjs on Raspberry Pi
 
-I purchased an offline controller for my woodpecker cnc board and was quickly disapointed that I could not use CNCjs while it was connected. It also lacked controls for zeroing out the work surface and was tiny. I found cnc-pendant-js, which had almost all the commmands I wanted and some open buttons.
+I purchased an offline controller for my woodpecker cnc board and was quickly disapointed that I could not use CNCjs while it was connected. It also lacked controls for zeroing out the work surface and was tiny. I found cncjs-pendant-js, which had almost all the commmands I wanted and some open buttons.
 
 This fork is a modified version of [cncjs-pendant-ps3](https://github.com/cncjs/cncjs-pendant-ps3) where you will find detailed instructions on connecting your [Dualshock 3 controller](https://www.playstation.com/en-us/explore/accessories/dualshock-3-ps3/) via wire and bluetooth.  I got a cheap clone "P3" controller working.
 
@@ -55,7 +55,7 @@ pm2 startup
 #[PM2] You have to run this command as root. Execute the following command once:
 sudo su -c "env PATH=$PATH:/home/pi/.nvm/versions/node/v8.1.6/bin pm2 startup debian -u pi --hp /home/pi"
 
-# Start Dual Shock / PS3 Bluetooth Remote Pendant for CNCjs (conected to serail device @ /dev/ttyUSB0) with PM2
+# Start Dualshock Remote Pendant for CNCjs (conected to serial device @/dev/ttyUSB0) with PM2
 pm2 start $(which cncjs-pendant-ps3) -- -p "/dev/ttyUSB0"
 
 # Set current running apps to startup
