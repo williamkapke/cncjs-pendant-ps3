@@ -23,6 +23,10 @@ const dualShock = require('dualshock-controller'); // https://www.npmjs.com/pack
 
 // [Varables]
 // =====================================================
+// Get config file
+const getUserHome = function() {
+    return process.env[(process.platform === 'win32') ? 'USERPROFILE' : 'HOME'];
+};
 const cncrc = path.resolve(getUserHome(), '.cncrc');
 const config = JSON.parse(fs.readFileSync(cncrc, 'utf8'));
 console.log(config.dualshockPendantEnabled);
@@ -38,10 +42,7 @@ const generateAccessToken = function(payload, secret, expiration) {
     return token;
 };
 
-// Get secret key from the config file and generate an access token
-const getUserHome = function() {
-    return process.env[(process.platform === 'win32') ? 'USERPROFILE' : 'HOME'];
-};
+
 
 // Pass User Defined Options
 module.exports = function(options, callback) {
