@@ -14,7 +14,9 @@ I am really starting to like the controller layout from cncjs-pendant-ps3 and ca
 
 ## Installation Instructions 
 
-CNCjs currently runs best on node version 8, these instructions assume you have NPM and NVM installed. Get started by setting the version of node and installing some required packages for bluetooth and building packages. 
+CNCjs currently runs best on node version 8, these instructions assume you have NPM and NVM installed along with [CNCjs on your Raspberry Pi](https://cnc.js.org/docs/rpi-setup-guide/). 
+
+Get started installing the pendant by setting the version of node and installing some required packages for bluetooth and building packages locally. 
 
 ### Install Node v8 and dualshock-controller and cncjs-pendant-ps3 node apps locally
 ```
