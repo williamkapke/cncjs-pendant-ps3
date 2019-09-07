@@ -37,6 +37,7 @@ const config = JSON.parse(fs.readFileSync(cncrc, 'utf8'));
 var customButtonMapping = false;
 if(config.hasOwnProperty('dualshockPendantCustomButtons')) {
 	customButtonMapping = config.customButtonMapping;
+	console.log(customButtonMapping);
 }
 //
 // Generate Token
