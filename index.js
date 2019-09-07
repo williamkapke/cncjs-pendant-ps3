@@ -428,7 +428,7 @@ module.exports = function(options, callback) {
 		controller.on('triangle:press', function(data) {
 			if (psx) {
 				if(customButtonMapping && config.hasOwnProperty('psxTriangle')){
-					console.log("Trying to send custom command:", config.psxTriangle)
+					console.log("Trying to send custom command: " + config.psxTriangle)
 					socket.emit('command', options.port, 'gcode', config.psxTriangle);
 				}
 				else {
