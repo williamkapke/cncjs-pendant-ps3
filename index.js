@@ -29,10 +29,16 @@ const getUserHome = function() {
 };
 const cncrc = path.resolve(getUserHome(), '.cncrc');
 const config = JSON.parse(fs.readFileSync(cncrc, 'utf8'));
-console.log(config.dualshockPendantEnabled);
+//console.log(config.dualshockPendantEnabled);
 
 // [Functions]
 // =====================================================
+// Button Mapping
+const customButtonMapping = false;
+if(config.hasOwnProperty('dualshockPendantCustomButtons')) {
+	customButtonMapping = config.customButtonMapping;
+}
+//
 // Generate Token
 const generateAccessToken = function(payload, secret, expiration) {
     const token = jwt.sign(payload, secret, {
@@ -41,8 +47,6 @@ const generateAccessToken = function(payload, secret, expiration) {
 
     return token;
 };
-
-
 
 // Pass User Defined Options
 module.exports = function(options, callback) {
@@ -420,10 +424,16 @@ module.exports = function(options, callback) {
 		// ------------------------------------------
 		// PSX
 
-		// M7
+		// M7 or Custom mapped command
 		controller.on('triangle:press', function(data) {
 			if (psx) {
-				socket.emit('command', options.port, 'gcode', 'M7');
+				if(customButtonMapping && config.customButtonMap.hasOwnProperty('psxTriangle')){
+					socket.emit('command', options.port, 'gcode', config.customButtonMap.psxTriangle);
+				}
+				else {
+					// default M7 command
+					socket.emit('command', options.port, 'gcode', 'M7');
+				}
 			}
 		});
 
