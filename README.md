@@ -1,9 +1,9 @@
 # Dualshock Remote Pendant for CNCjs on Raspberry Pi
 
 <ul>
-    <li><a href="installation-instructions">Installation Instructions</a></li>
-    <li><a href="auto-start-and-restart">Auto Start and Restart</a></li>
-    <li><a href="update-notes">Update Notes</a></li>
+    <li><a href="#installation-instructions">Installation Instructions</a></li>
+    <li><a href="#auto-start-and-restart">Auto Start and Restart</a></li>
+    <li><a href="#update-notes">Update Notes</a></li>
 </ul>
 
 I purchased an offline controller for my woodpecker cnc board and was quickly disapointed that I could not use CNCjs while it was connected. It also lacked controls for zeroing out the work surface and was tiny. I found cncjs-pendant-js, which had almost all the commmands I wanted and some open buttons.
