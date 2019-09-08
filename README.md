@@ -1,12 +1,18 @@
 # Dualshock Remote Pendant for CNCjs on Raspberry Pi
 
+<ul>
+    <li><a href="installation-instructions">Installation Instructions</a></li>
+    <li><a href="auto-start-and-restart">Auto Start and Restart</a></li>
+    <li><a href="update-notes">Update Notes</a></li>
+</ul>
+
 I purchased an offline controller for my woodpecker cnc board and was quickly disapointed that I could not use CNCjs while it was connected. It also lacked controls for zeroing out the work surface and was tiny. I found cncjs-pendant-js, which had almost all the commmands I wanted and some open buttons.
 
 This fork is a modified version of [cncjs-pendant-ps3](https://github.com/cncjs/cncjs-pendant-ps3) where you will find detailed instructions on connecting your [Dualshock 3 controller](https://www.playstation.com/en-us/explore/accessories/dualshock-3-ps3/) via wire and bluetooth.  I got a cheap clone "P3" controller working.
 
 For about the same price as the offline controller I think the dualshock 3 is a much more comfortable and capable pendant option. I added the R2 modified commands for zeroing out the axes and going to the home position to the previously empty R2 modified button commands. 
 
-I am really starting to like the controller layout from cncjs-pendant-ps3 and can now do most of what I need with the controller. I may add the Z probe command to one of the PSX modified buttons (+P on the button map) that are currently mapped to cooling functions that are unused on my machine.
+I am really starting to like the controller layout from cncjs-pendant-ps3 and after adding commands to zero out the axes to the unused R2 modified commands I can now do everything I need with the controller. 
 
 ![Button Map](images/Button_Map.jpg)
 
@@ -79,6 +85,5 @@ Because of these changes I had to fork the two git repositories and am no longer
 
 ### Todo
 
-* Add json configuration option for 3 PSX modified cooling buttons.
-* Add button and get configuration for z probe 
+* ~~Add json configuration option for 3 PSX modified cooling buttons.~~
 * Other potential commands: jog cancel, status
