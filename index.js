@@ -335,11 +335,11 @@ module.exports = function(options, callback) {
 		controller.on('square:press', function(data) {
 			if (r1) {
 				socket.emit('command', options.port, 'gcode', 'G91');
-				socket.emit('command', options.port, 'gcode', 'G38.2 Z-15.001 F120');
+				socket.emit('command', options.port, 'gcode', 'G38.2 Z-20 F120');
 				socket.emit('command', options.port, 'gcode', 'G90');
-				socket.emit('command', options.port, 'gcode', 'G10 L20 P1 Z15.001');
+				socket.emit('command', options.port, 'gcode', 'G10 L20 P1 Z20');
 				socket.emit('command', options.port, 'gcode', 'G91');
-				socket.emit('command', options.port, 'gcode', 'G0 Z3');
+				socket.emit('command', options.port, 'gcode', 'G0 Z5');
 				socket.emit('command', options.port, 'gcode', 'G90');
 
 				//console.log('probe:' + data);
