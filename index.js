@@ -338,7 +338,7 @@ module.exports = function(options, callback) {
 				var retractionDistance = 5;
 				var probeDepth = 10;
 				var probeFeedrate = 25;
-				var probeCommand = 38.2;
+				var probeCommand = 'G38.2';
 				var useTLO = false;
 
 				// set from probe node in .cncrc
@@ -357,7 +357,7 @@ module.exports = function(options, callback) {
 				}
 				// Z-Probe
 				socket.emit('command', options.port, 'gcode', 'G91');
-				if(probeCommand === 38.2 || probeCommand === 38.3) {
+				if(probeCommand === 'G38.2' || probeCommand === 'G38.3') {
 					socket.emit('command', options.port, 'gcode', 'G' + probeCommand +' Z-' + probeDepth + ' F' + probeFeedrate);
 				}
 				else {
