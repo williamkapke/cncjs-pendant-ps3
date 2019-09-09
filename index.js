@@ -358,10 +358,10 @@ module.exports = function(options, callback) {
 				// Z-Probe
 				socket.emit('command', options.port, 'gcode', 'G91');
 				if(probeCommand === 'G38.2' || probeCommand === 'G38.3') {
-					socket.emit('command', options.port, 'gcode', 'G' + probeCommand +' Z-' + probeDepth + ' F' + probeFeedrate);
+					socket.emit('command', options.port, 'gcode', probeCommand +' Z-' + probeDepth + ' F' + probeFeedrate);
 				}
 				else {
-					socket.emit('command', options.port, 'gcode', 'G' + probeCommand +' Z' + probeDepth + ' F' + probeFeedrate);
+					socket.emit('command', options.port, 'gcode', probeCommand +' Z' + probeDepth + ' F' + probeFeedrate);
 				}
 				socket.emit('command', options.port, 'gcode', 'G90');
 				if(useTLO) {
