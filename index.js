@@ -343,14 +343,13 @@ module.exports = function(options, callback) {
 
 				// set from probe node in .cncrc
 				if(config.hasOwnProperty('probe')){
-					probeCommand = config.probe.probeCommand;
-					useTLO = config.probe.useTLO;
-					probeDepth = config.probe.probeDepth;
-					probeFeedrate = config.probe.probeFeedrate;
-					touchPlateHeight = config.probe.touchPlateHeight;
-					retractionDistance = config.probe.retractionDistance;
+					probeCommand = config.ps3Pendant.probe.probeCommand;
+					useTLO = config.ps3Pendant.probe.useTLO;
+					probeDepth = config.ps3Pendant.probe.probeDepth;
+					probeFeedrate = config.ps3Pendant.probe.probeFeedrate;
+					touchPlateHeight = config.ps3Pendant.probe.touchPlateHeight;
+					retractionDistance = config.ps3Pendant.probe.retractionDistance;
 				}
-				console.log(useTLO);
 				if(useTLO) {
 					// Cancel tool length offset
 					socket.emit('command', options.port, 'gcode', 'G49');
