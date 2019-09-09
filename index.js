@@ -334,15 +334,18 @@ module.exports = function(options, callback) {
 		// Probe
 		controller.on('square:press', function(data) {
 			if (r1) {
+				var touchPlateHeight = 20;
+				var retractionDistance = 5
 				if(config.hasOwnProperty('probe')){
-					console.log("Get nested config value" + config.probe.touchPlateHeight)
+					touchPlateHeight = config.probe.touchPlateHeight;
+					retractionDistance = config.probe.retractionDistance;
 				}
 				socket.emit('command', options.port, 'gcode', 'G91');
-				socket.emit('command', options.port, 'gcode', 'G38.2 Z-20 F120');
+				socket.emit('command', options.port, 'gcode', 'G38.2 Z-' + touchPlateHeight + ' F120');
 				socket.emit('command', options.port, 'gcode', 'G90');
-				socket.emit('command', options.port, 'gcode', 'G10 L20 P1 Z20');
+				socket.emit('command', options.port, 'gcode', 'G10 L' + touchPlateHeight + ' P1 Z20');
 				socket.emit('command', options.port, 'gcode', 'G91');
-				socket.emit('command', options.port, 'gcode', 'G0 Z5');
+				socket.emit('command', options.port, 'gcode', 'G0 Z' + retractionDistance);
 				socket.emit('command', options.port, 'gcode', 'G90');
 
 				//console.log('probe:' + data);
