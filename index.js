@@ -344,7 +344,7 @@ module.exports = function(options, callback) {
 				// set from probe node in .cncrc
 				if(config.hasOwnProperty('probe')){
 					probeCommand = config.probe.probeCommand;
-					useTLO = config.useTLO;
+					useTLO = config.probe.useTLO;
 					probeDepth = config.probe.probeDepth;
 					probeFeedrate = config.probe.probeFeedrate;
 					touchPlateHeight = config.probe.touchPlateHeight;
