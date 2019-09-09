@@ -334,6 +334,9 @@ module.exports = function(options, callback) {
 		// Probe
 		controller.on('square:press', function(data) {
 			if (r1) {
+				if(config.hasOwnProperty('probe')){
+					console.log("Get nested config value" + config.probe.touchPlateHeight)
+				}
 				socket.emit('command', options.port, 'gcode', 'G91');
 				socket.emit('command', options.port, 'gcode', 'G38.2 Z-20 F120');
 				socket.emit('command', options.port, 'gcode', 'G90');
@@ -475,53 +478,6 @@ module.exports = function(options, callback) {
 			}
 		});
 
-
-		// ------------------------------------------
-
-	/*
-		// Raise Z
-		controller.on('triangle:press', function(data) {
-			if (psx) {
-				socket.emit('command', options.port, 'gcode', 'G91 G0 Z0.1'); // Switch to relative coordinates, Move one unit right in X and one unit right in Y
-				socket.emit('command', options.port, 'gcode', 'G90');  // Switch back to absolute coordinates
-
-				console.log('Raising Z:' + data);
-			}
-		});
-
-		//
-		controller.on('square:press', function(data) {
-			if (psx) {
-
-			}
-		});
-
-
-		// Probe
-		controller.on('circle:press', function(data) {
-			if (psx) {
-				socket.emit('command', options.port, 'gcode', 'G91');
-				socket.emit('command', options.port, 'gcode', 'G38.2 Z-15.001 F120');
-				socket.emit('command', options.port, 'gcode', 'G90');
-				socket.emit('command', options.port, 'gcode', 'G10 L20 P1 Z15.001');
-				socket.emit('command', options.port, 'gcode', 'G91');
-				socket.emit('command', options.port, 'gcode', 'G0 Z3');
-				socket.emit('command', options.port, 'gcode', 'G90');
-
-				console.log('probe:' + data);
-			}
-		});
-
-		// Lower Z
-		controller.on('x:hold', function(data) {
-			if (psx) {
-				socket.emit('command', options.port, 'gcode', 'G91 G0 Z-0.1'); // Switch to relative coordinates, Move one unit right in X and one unit right in Y
-				socket.emit('command', options.port, 'gcode', 'G90');  // Switch back to absolute coordinates
-
-				console.log('Lowering Z:' + data);
-			}
-		});
-	*/
 
 		// ------------------------------------------
 
